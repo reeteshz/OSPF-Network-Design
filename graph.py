@@ -34,16 +34,23 @@ class Graph:
     def createGraph(self, edges):
         for edge in edges:
             edge = edge.strip().split(" ")
-            self.addEdge(edge[0], edge[1], edge[2])
+            self.createEdge(edge[0], edge[1], edge[2])
 
-    # Add a new edge to the graph.
-    def addEdge(self, sourceName,  destName, cost):
+    # Its initially adds edges to the graph.
+    def createEdge(self, sourceName,  destName, cost):
         v = self.getVertex(sourceName)
         w = self.getVertex(destName)
         edge = Edge(sourceName, destName, cost)
         v.adj.append(edge)
         edgeReverse = Edge(destName, sourceName, cost)
         w.adj.append(edgeReverse)
+
+    # It adds new edge to the existing graph.
+    def addEdge(self, sourceName,  destName, cost):
+        v = self.getVertex(sourceName)
+        w = self.getVertex(destName)
+        edge = Edge(sourceName, destName, cost)
+        v.adj.append(edge)
 
     def takeEdgeUpOrDown(self, sourceName,  destName, statusToUpdate):
         edges = self.vertexMap[sourceName].adj
@@ -63,6 +70,13 @@ class Graph:
             print(f'Vertex {verName} is up')
         else:
             print(f'Vertex {verName} is down')
+
+    def deleteEdge(self, sourceName,  destName):
+        edges = self.vertexMap[sourceName].adj
+        for edge in edges:
+            if edge.destination == destName:
+                self.vertexMap[sourceName].adj.remove(edge)
+                print(f'Edge from {sourceName} to {destName} is deleted...')
 
     # If vertexName is not present, add it to vertexMap.
     # In either case, return the Vertex.

@@ -20,13 +20,13 @@ def main():
         elif command[0] == "deleteedge ":
             print(f'Deleting edge from {command[1]} to {command[2]}...')
         elif command[0] == "edgedown":
-            print(f'Edge from {command[1]} to {command[2]} is down...')
+            graphObj.takeEdgeUpOrDown(command[1], command[2], False)
         elif command[0] == "edgeup":
-            print(f'Edge from {command[1]} to {command[2]} is up...')
+            graphObj.takeEdgeUpOrDown(command[1], command[2], True)
         elif command[0] == "vertexdown":
-            print(f'Vertex {command[1]} is down')
+            graphObj.takeVertexUpOrDown(command[1], False)
         elif command[0] == "vertexup":
-            print(f'Vertex {command[1]} is up')
+            graphObj.takeVertexUpOrDown(command[1], True)
         elif command[0] == "reachable":
             graphObj.printReachables()
         elif command[0] == "print":

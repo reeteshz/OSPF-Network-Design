@@ -7,6 +7,7 @@ class Vertex:
         self.adj =  []    #  Adjacent vertices
         self.prev = None    #  Previous vertex on shortest path
         self.dist = np.inf    #  Distance of path
+        self.isUp = True
 
     def Vertex(self, name):
         self.name = name

@@ -16,6 +16,7 @@ def main():
         print(f'command is {command[0]}')
         if command[0] == "addedge":
             print(f'Adding edge from {command[1]} to {command[2]}...')
+            graphObj.addEdge(command[1], command[2], command[3])
         elif command[0] == "deleteedge ":
             print(f'Deleting edge from {command[1]} to {command[2]}...')
         elif command[0] == "edgedown":
@@ -27,7 +28,7 @@ def main():
         elif command[0] == "vertexup":
             print(f'Vertex {command[1]} is up')
         elif command[0] == "reachable":
-            print("printing reachables...")
+            graphObj.printReachables()
         elif command[0] == "print":
             graphObj.printGraph()
         elif command[0] == "graph":

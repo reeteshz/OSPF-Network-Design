@@ -14,6 +14,16 @@ class Graph:
             for edge in vertex.adj:
                 print(f'     {edge.destination} {edge.cost}')
 
+    # Printing reachable vertices and ignoring DOWN vertices
+    def printReachables(self):
+        print("printing reachables...")
+        for key, vertex in self.vertexMap.items():
+            print(key)
+            vertex.adj.sort(key=lambda e: e.destination)
+            for edge in vertex.adj:
+                if edge.isUp:
+                    print(f'     {edge.destination}')
+
     # Iterating over all vertices pairs given as input
     def createGraph(self, edges):
         for edge in edges:

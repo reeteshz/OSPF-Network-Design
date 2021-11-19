@@ -1,3 +1,5 @@
+import numpy as np
+import queue as q
 from vertex import Vertex
 from edge import Edge
 
@@ -86,3 +88,38 @@ class Graph:
             self.vertexMap[vertexName] = v
         v = self.vertexMap[vertexName]
         return  v
+
+    def findShortestPath(self, start, destination):
+        self.vertexMap[start].dist = 0
+        self.vertexMap[start].prev = None
+
+        for key, vertex in self.vertexMap.items():
+            pq = q.PriorityQueue()
+            for edge in vertex.adj:
+                pq.put((edge.cost, edge.source, edge.destination))
+            while not pq.empty():
+                connectingEdge = pq.get()
+                if self.vertexMap[connectingEdge[2]].dist > self.vertexMap[connectingEdge[1]].dist + connectingEdge[0]:
+                    self.vertexMap[connectingEdge[2]].dist = round(self.vertexMap[connectingEdge[1]].dist + connectingEdge[0], 2)
+                    self.vertexMap[connectingEdge[2]].prev = self.vertexMap[connectingEdge[1]]
+                    # print(f'{self.vertexMap[connectingEdge[2]].name} >> {self.vertexMap[connectingEdge[2]].dist}')
+        self.printPath(destination)
+
+    def printPath(self, destName):
+        w = self.vertexMap[destName]
+        if w is None:
+            print("Destination vertex not found")
+        elif np.isinf(w.dist):
+            raise Exception(destName + " is unreachable")
+        else:
+            self.printPath_(w)
+            print(f' {w.dist}')
+        print()
+
+    def printPath_(self, dest):
+        if dest.prev is not None:
+            self.printPath_(dest.prev)
+            print(" ", end ="")
+        print(dest.name, end ="")
+
+

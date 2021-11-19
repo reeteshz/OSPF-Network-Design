@@ -27,6 +27,8 @@ def main():
             with open(fin) as f:
                 edges = f.readlines()
                 graphObj.createGraph(edges)
+        elif command[0] == "path":
+            graphObj.findShortestPath(command[1], command[2])
         elif command[0] == "quit":
             print("Thank you!!!")
             break

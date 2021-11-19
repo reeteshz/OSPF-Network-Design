@@ -90,19 +90,20 @@ class Graph:
         return  v
 
     def findShortestPath(self, start, destination):
+        self.resetAll()
         self.vertexMap[start].dist = 0
         self.vertexMap[start].prev = None
 
         for key, vertex in self.vertexMap.items():
             pq = q.PriorityQueue()
             for edge in vertex.adj:
-                pq.put((edge.cost, edge.source, edge.destination))
+                if edge.isUp == True and self.vertexMap[edge.destination].isUp == True:
+                    pq.put((edge.cost, edge.source, edge.destination))
             while not pq.empty():
                 connectingEdge = pq.get()
                 if self.vertexMap[connectingEdge[2]].dist > self.vertexMap[connectingEdge[1]].dist + connectingEdge[0]:
                     self.vertexMap[connectingEdge[2]].dist = round(self.vertexMap[connectingEdge[1]].dist + connectingEdge[0], 2)
                     self.vertexMap[connectingEdge[2]].prev = self.vertexMap[connectingEdge[1]]
-                    # print(f'{self.vertexMap[connectingEdge[2]].name} >> {self.vertexMap[connectingEdge[2]].dist}')
         self.printPath(destination)
 
     def printPath(self, destName):
@@ -121,5 +122,10 @@ class Graph:
             self.printPath_(dest.prev)
             print(" ", end ="")
         print(dest.name, end ="")
+
+    def resetAll(self):
+        for key, vertex in self.vertexMap.items():
+            self.vertexMap[key].dist = np.inf
+            self.vertexMap[key].prev = None
 
 

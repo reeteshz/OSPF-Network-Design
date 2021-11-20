@@ -8,6 +8,7 @@ class Vertex:
         self.prev = None    #  Previous vertex on shortest path
         self.dist = np.inf    #  Distance of path
         self.isUp = True
+        self.visited = False
 
     def Vertex(self, name):
         self.name = name

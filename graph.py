@@ -26,11 +26,23 @@ class Graph:
     def printReachables(self):
         print("printing reachables...")
         for key, vertex in self.vertexMap.items():
+            self.markAllUnvisited()
             print(key)
-            vertex.adj.sort(key=lambda e: e.destination)
-            for edge in vertex.adj:
-                if edge.isUp:
-                    print(f'     {edge.destination}')
+            if vertex.isUp == True:
+                self.getReachables(vertex)
+
+    def getReachables(self, v):
+        q = []
+        q.append(v)
+        while q:
+            visitedVertex = q.pop(0)
+            for edge in visitedVertex.adj:
+                if edge.isUp == True:
+                    adjVertex = self.vertexMap[edge.destination]
+                    if adjVertex.visited == False and adjVertex.isUp == True:
+                        adjVertex.visited = True
+                        print(f'    {adjVertex.name}')
+                        q.append(adjVertex)
 
     # Iterating over all vertices pairs given as input
     def createGraph(self, edges):
@@ -127,5 +139,10 @@ class Graph:
         for key, vertex in self.vertexMap.items():
             self.vertexMap[key].dist = np.inf
             self.vertexMap[key].prev = None
+
+    def markAllUnvisited(self):
+        for key, vertex in self.vertexMap.items():
+            self.vertexMap[key].visited = False
+
 
 

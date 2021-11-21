@@ -2,6 +2,7 @@ import numpy as np
 import queue as q
 from vertex import Vertex
 from edge import Edge
+import datetime;
 
 class Graph:
     def __init__(self):
@@ -29,11 +30,15 @@ class Graph:
             self.markAllUnvisited()
             print(key)
             if vertex.isUp == True:
-                self.getReachables(vertex)
+                reached = self.getReachables(vertex)
+                reached = sorted(reached)
+                print("   " , end = '')
+                print(*reached, sep = "\n   ")
 
     def getReachables(self, v):
         q = []
         q.append(v)
+        reached = []
         while q:
             visitedVertex = q.pop(0)
             for edge in visitedVertex.adj:
@@ -41,8 +46,9 @@ class Graph:
                     adjVertex = self.vertexMap[edge.destination]
                     if adjVertex.visited == False and adjVertex.isUp == True:
                         adjVertex.visited = True
-                        print(f'    {adjVertex.name}')
+                        reached.append(adjVertex.name)
                         q.append(adjVertex)
+        return reached
 
     # Iterating over all vertices pairs given as input
     def createGraph(self, edges):
@@ -133,7 +139,6 @@ class Graph:
         else:
             self.printPath_(w)
             print(f' {w.dist}')
-        print()
 
     def printPath_(self, dest):
         if dest.prev is not None:

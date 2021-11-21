@@ -61,10 +61,16 @@ class Graph:
 
     # It adds new edge to the existing graph.
     def addEdge(self, sourceName,  destName, cost):
-        v = self.getVertex(sourceName)
-        w = self.getVertex(destName)
-        edge = Edge(sourceName, destName, cost)
-        v.adj.append(edge)
+        alreadyExists = False
+        for edge in self.vertexMap[sourceName].adj:
+            if edge.destination == destName:
+                edge.cost = cost
+                alreadyExists = True
+                break
+        if not alreadyExists:
+            v = self.getVertex(sourceName)
+            edge = Edge(sourceName, destName, cost)
+            v.adj.append(edge)
 
     def takeEdgeUpOrDown(self, sourceName,  destName, statusToUpdate):
         edges = self.vertexMap[sourceName].adj
@@ -123,7 +129,7 @@ class Graph:
         if w is None:
             print("Destination vertex not found")
         elif np.isinf(w.dist):
-            raise Exception(destName + " is unreachable")
+            print(destName + " is unreachable")
         else:
             self.printPath_(w)
             print(f' {w.dist}')

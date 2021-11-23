@@ -9,7 +9,7 @@ class Graph:
 
     # Printing graph structure
     def printGraph(self):
-        for key, vertex in self.vertexMap.items():
+        for key, vertex in sorted(self.vertexMap.items()):
             if vertex.isUp == False:
                 print(f'{key} DOWN')
             else:
@@ -23,7 +23,7 @@ class Graph:
 
     # Printing reachable vertices and ignoring DOWN vertices
     def printReachables(self):
-        for key, vertex in self.vertexMap.items():
+        for key, vertex in sorted(self.vertexMap.items()):
             self.markAllUnvisited()
             print(key)
             if vertex.isUp == True:
@@ -81,24 +81,24 @@ class Graph:
             if edge.destination == destName:
                 edge.isUp =  statusToUpdate
                 if statusToUpdate:
-                    print(f'Edge from {sourceName} to {destName} is up...')
+                    print(f'Link from {sourceName} to {destName} is up...')
                 else:
-                    print(f'Edge from {sourceName} to {destName} is down...')
+                    print(f'Link from {sourceName} to {destName} is down...')
 
     def takeVertexUpOrDown(self, verName, statusToUpdate):
         vertex = self.vertexMap[verName]
         vertex.isUp = statusToUpdate
         if statusToUpdate:
-            print(f'Vertex {verName} is up')
+            print(f'{verName} router is up')
         else:
-            print(f'Vertex {verName} is down')
+            print(f'{verName} router is down')
 
     def deleteEdge(self, sourceName,  destName):
         edges = self.vertexMap[sourceName].adj
         for edge in edges:
             if edge.destination == destName:
                 self.vertexMap[sourceName].adj.remove(edge)
-                print(f'Edge from {sourceName} to {destName} is deleted...')
+                print(f'Link from {sourceName} to {destName} is removed...')
 
     # If vertexName is not present, add it to vertexMap.
     # In either case, return the Vertex.
@@ -111,23 +111,26 @@ class Graph:
 
     def findShortestPath(self, start, destination):
         self.resetAll()
-        self.vertexMap[start].dist = 0
-        self.vertexMap[start].prev = None
-        heap = [v for v in self.vertexMap.values()]
-        heapq.heapify(heap)
-        while len(heap) != 0:
-            vertex = heapq.heappop(heap)
-            for connectingEdge in vertex.adj:
-                if (self.vertexMap[connectingEdge.destination].dist > vertex.dist + connectingEdge.cost) and (connectingEdge.isUp == True and self.vertexMap[connectingEdge.destination].isUp == True):
-                    self.vertexMap[connectingEdge.destination].dist = round(vertex.dist + connectingEdge.cost, 2)
-                    self.vertexMap[connectingEdge.destination].prev = vertex
-                    self.heapDecreaseKey(heap, heap.index(self.vertexMap[connectingEdge.destination]), self.vertexMap[connectingEdge.destination].dist)
-        self.printPath(destination)
+        if self.vertexMap[start].isUp != False:
+            self.vertexMap[start].dist = 0
+            self.vertexMap[start].prev = None
+            heap = [v for v in self.vertexMap.values()]
+            heapq.heapify(heap)
+            while len(heap) != 0:
+                vertex = heapq.heappop(heap)
+                for connectingEdge in vertex.adj:
+                    if (self.vertexMap[connectingEdge.destination].dist > vertex.dist + connectingEdge.cost) and (connectingEdge.isUp == True and self.vertexMap[connectingEdge.destination].isUp == True):
+                        self.vertexMap[connectingEdge.destination].dist = round(vertex.dist + connectingEdge.cost, 2)
+                        self.vertexMap[connectingEdge.destination].prev = vertex
+                        self.heapDecreaseKey(heap, heap.index(self.vertexMap[connectingEdge.destination]), self.vertexMap[connectingEdge.destination].dist)
+            self.printPath(destination)
+        else:
+            print(f'{start} is down')
 
     def printPath(self, destName):
         w = self.vertexMap[destName]
         if w is None:
-            print("Destination vertex not found")
+            print("Destination not found")
         elif np.isinf(w.dist):
             print(destName + " is unreachable")
         else:

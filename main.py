@@ -3,9 +3,8 @@ from graph import Graph
 def main():
     graphObj = Graph()
     while True:
-        command = input("Enter your command:")
+        command = input("Enter your query:")
         command = command.strip().split(" ")
-        print(f'command is {command[0]}')
         if command[0] == "addedge":
             graphObj.addEdge(command[1], command[2], command[3])
         elif command[0] == "deleteedge":
@@ -30,7 +29,6 @@ def main():
         elif command[0] == "path":
             graphObj.findShortestPath(command[1], command[2])
         elif command[0] == "quit":
-            print("Thank you!!!")
             break
         else:
             print("Invalid command")

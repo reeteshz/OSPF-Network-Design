@@ -9,7 +9,6 @@ class Graph:
 
     # Printing graph structure
     def printGraph(self):
-        print("Printing Graph...")
         for key, vertex in self.vertexMap.items():
             if vertex.isUp == False:
                 print(f'{key} DOWN')
@@ -24,7 +23,6 @@ class Graph:
 
     # Printing reachable vertices and ignoring DOWN vertices
     def printReachables(self):
-        print("printing reachables...")
         for key, vertex in self.vertexMap.items():
             self.markAllUnvisited()
             print(key)
@@ -80,7 +78,6 @@ class Graph:
     def takeEdgeUpOrDown(self, sourceName,  destName, statusToUpdate):
         edges = self.vertexMap[sourceName].adj
         for edge in edges:
-            # print(f'{edge.source} >> {edge.destination}')
             if edge.destination == destName:
                 edge.isUp =  statusToUpdate
                 if statusToUpdate:
@@ -157,9 +154,7 @@ class Graph:
             return
         heap[i].dist = key
         while i > 0 and heap[(i-1)//2].dist > heap[i].dist:
-            temp = heap[(i-1)//2]
-            heap[(i-1)//2] = heap[i]
-            heap[i] = temp
+            heap[i], heap[(i-1)//2] = (heap[(i-1)//2], heap[i])
             i = (i-1)//2
 
 

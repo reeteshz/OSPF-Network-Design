@@ -4,10 +4,10 @@ import numpy as np
 class Vertex:
 
     def __init__(self, name):
-        self.name = name    #  Vertex name
-        self.adj =  []    #  Adjacent vertices
-        self.prev = None    #  Previous vertex on shortest path
-        self.dist = np.inf    #  Distance of path
+        self.name = name
+        self.adj =  []
+        self.prev = None
+        self.dist = np.inf
         self.isUp = True
         self.visited = False
 

@@ -2,6 +2,7 @@
 import numpy as np
 
 class Vertex:
+
     def __init__(self, name):
         self.name = name    #  Vertex name
         self.adj =  []    #  Adjacent vertices
@@ -10,6 +11,5 @@ class Vertex:
         self.isUp = True
         self.visited = False
 
-    def Vertex(self, name):
-        self.name = name
-        adj = []
+    def __lt__(self, other):
+        return self.dist<other.dist

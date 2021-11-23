@@ -1,8 +1,7 @@
 import numpy as np
-import queue as q
 from vertex import Vertex
 from edge import Edge
-import datetime;
+import heapq
 
 class Graph:
     def __init__(self):
@@ -70,7 +69,7 @@ class Graph:
         alreadyExists = False
         for edge in self.vertexMap[sourceName].adj:
             if edge.destination == destName:
-                edge.cost = cost
+                edge.cost = float(cost)
                 alreadyExists = True
                 break
         if not alreadyExists:
@@ -117,17 +116,15 @@ class Graph:
         self.resetAll()
         self.vertexMap[start].dist = 0
         self.vertexMap[start].prev = None
-
-        for key, vertex in self.vertexMap.items():
-            pq = q.PriorityQueue()
-            for edge in vertex.adj:
-                if edge.isUp == True and self.vertexMap[edge.destination].isUp == True:
-                    pq.put((edge.cost, edge.source, edge.destination))
-            while not pq.empty():
-                connectingEdge = pq.get()
-                if self.vertexMap[connectingEdge[2]].dist > self.vertexMap[connectingEdge[1]].dist + connectingEdge[0]:
-                    self.vertexMap[connectingEdge[2]].dist = round(self.vertexMap[connectingEdge[1]].dist + connectingEdge[0], 2)
-                    self.vertexMap[connectingEdge[2]].prev = self.vertexMap[connectingEdge[1]]
+        heap = [v for v in self.vertexMap.values()]
+        heapq.heapify(heap)
+        while len(heap) != 0:
+            vertex = heapq.heappop(heap)
+            for connectingEdge in vertex.adj:
+                if (self.vertexMap[connectingEdge.destination].dist > vertex.dist + connectingEdge.cost) and (connectingEdge.isUp == True and self.vertexMap[connectingEdge.destination].isUp == True):
+                    self.vertexMap[connectingEdge.destination].dist = round(vertex.dist + connectingEdge.cost, 2)
+                    self.vertexMap[connectingEdge.destination].prev = vertex
+                    self.heapDecreaseKey(heap, heap.index(self.vertexMap[connectingEdge.destination]), self.vertexMap[connectingEdge.destination].dist)
         self.printPath(destination)
 
     def printPath(self, destName):
@@ -154,6 +151,16 @@ class Graph:
     def markAllUnvisited(self):
         for key, vertex in self.vertexMap.items():
             self.vertexMap[key].visited = False
+
+    def heapDecreaseKey(self, heap, i, key):
+        if key > heap[i].dist:
+            return
+        heap[i].dist = key
+        while i > 0 and heap[(i-1)//2].dist > heap[i].dist:
+            temp = heap[(i-1)//2]
+            heap[(i-1)//2] = heap[i]
+            heap[i] = temp
+            i = (i-1)//2
 
 
 

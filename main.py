@@ -1,3 +1,6 @@
+# main.py
+# Takes newtwork input from command line
+# Gets user queries and does newtwork operations accordingly
 from graph import Graph
 
 def main():

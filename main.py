@@ -1,6 +1,14 @@
-# main.py
-# Takes newtwork input from command line
-# Gets user queries and does newtwork operations accordingly
+# Name: Reetesh Zope
+# Student ID: 801138214
+# Email ID: rzope1@uncc.edu
+
+"""
+main.py
+_______
+    - Takes network input from command line
+    - Gets user queries and does network operations accordingly from graph import Graph
+"""
+
 from graph import Graph
 
 def main():
@@ -10,6 +18,8 @@ def main():
         command = command.strip().split(" ")
         if command[0] == "addedge":
             graphObj.addEdge(command[1], command[2], command[3])
+        elif command[0] == "path":
+            graphObj.findShortestPath(command[1], command[2])
         elif command[0] == "deleteedge":
             graphObj.deleteEdge(command[1], command[2])
         elif command[0] == "edgedown":
@@ -29,12 +39,10 @@ def main():
             with open(fin) as f:
                 edges = f.readlines()
                 graphObj.createGraph(edges)
-        elif command[0] == "path":
-            graphObj.findShortestPath(command[1], command[2])
         elif command[0] == "quit":
             break
         else:
-            print("Invalid command")
+            print("Invalid query")
 
 if __name__=="__main__":
     main()

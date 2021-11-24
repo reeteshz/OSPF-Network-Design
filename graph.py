@@ -5,10 +5,12 @@
 """
 graph.py
 ________
-    - A class used to represent network graph.
+    - It contains a class used to represent network graph.
+    - Creates network graph as per the input file
+    - Performs netork operations such as Add Edge, Delete Edge, Edge Down, Edge Up, Vertex Down, Vertex Up
     - Computes shortest paths by OSPF protocol routes packets using Dijkstra's shortest path algorithm
-    - Gets list of routers and their respective links with other routers
-    - Gets list of all reachable node from each router in the network
+    - Printing all routers and their adjacent routers
+    - Printing all other reachable routers from the routers in the network
 
 Attributes
 ----------
@@ -25,7 +27,7 @@ class Graph:
     def __init__(self):
         self.vertexMap =  dict()
 
-    # Printing newtwork graph structure
+    # Shows network graph structure. Prints all routers and their adjacent routers
     def printGraph(self):
         for key, vertex in sorted(self.vertexMap.items()):
             if vertex.isUp == False:

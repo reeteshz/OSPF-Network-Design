@@ -5,7 +5,7 @@
 """
 edge.py
 _________
-    A class used to represent the link bewteen two routers in the network.
+    A class used to represent the link between two routers in the network.
 ----------
 Attributes
 ----------

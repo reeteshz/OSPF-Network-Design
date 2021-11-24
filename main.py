@@ -5,8 +5,8 @@
 """
 main.py
 _______
-    - Takes network input from command line
-    - Gets user queries and does network operations accordingly from graph import Graph
+    - Takes network file input from command line containing - <source> <destination> <transmission time>
+    - Gets user queries and does network operations accordingly on the network graph
 """
 
 from graph import Graph

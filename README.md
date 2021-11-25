@@ -1,5 +1,10 @@
 # Shortest Paths in a Network with OSPF protocol
 
+````
+Name: Reetesh Gopal Zope
+Student ID: 801138124
+````
+
 ### How to run
 ````
 python main.py

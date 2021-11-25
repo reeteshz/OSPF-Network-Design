@@ -23,7 +23,7 @@ OSPF-Network-Design
 ```
 
 `main.py`
-  - It accepts file input through standard i/o operation which contains pairs of router and time of data trasmission bewteen them
+  - It accepts file input through standard i/o operation which contains pairs of router and time of data transmission between them
   - It accepts user queries and does network operations accordingly on the network graph
 
 `graph.py`

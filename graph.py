@@ -76,6 +76,7 @@ class Graph:
         q = []
         q.append(v)
         reached = []
+        v.visited = True
         while q:
             visitedVertex = q.pop(0)
             for edge in visitedVertex.adj:
@@ -140,6 +141,7 @@ class Graph:
                 break
         if not alreadyExists:
             v = self.getVertex(sourceName)
+            w = self.getVertex(destName)
             edge = Edge(sourceName, destName, cost)
             v.adj.append(edge)
 

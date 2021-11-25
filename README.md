@@ -29,8 +29,8 @@ OSPF-Network-Design
 `graph.py`
   - It contains a class used to represent network graph.
   - Creates network graph as per the input file
-  - Performs netork operations such as Add Edge, Delete Edge, Edge Down, Edge Up, Vertex Down, Vertex Up
-  - Computes shortest paths by OSPF protocol routes packets using Dijkstra's shortest path algorithm
+  - Performs network operations such as Add Edge, Delete Edge, Edge Down, Edge Up, Vertex Down, Vertex Up
+  - Computes the shortest paths by OSPF protocol routes packets using Dijkstra's shortest path algorithm
   - Printing all routers and their adjacent routers
   - Printing all other reachable routers from the routers in the network
 

@@ -6,7 +6,7 @@
 main.py
 _______
     - Takes network file input from command line containing - <source> <destination> <transmission time>
-    - Gets user queries and does network operations accordingly on the network graph
+    - Accepts user queries and does network operations accordingly on the network graph
 """
 
 from graph import Graph
@@ -14,7 +14,7 @@ from graph import Graph
 def main():
     graphObj = Graph()
     while True:
-        command = input("Enter your query:")
+        command = input("")
         command = command.strip().split(" ")
         if command[0] == "addedge":
             graphObj.addEdge(command[1], command[2], command[3])

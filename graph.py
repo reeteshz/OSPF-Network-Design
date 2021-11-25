@@ -53,8 +53,8 @@ class Graph:
     def printReachables(self):
         for key, vertex in sorted(self.vertexMap.items()):
             self.markAllUnvisited()
-            print(key)
             if vertex.isUp == True:
+                print(key)
                 reached = self.getReachables(vertex)
                 reached = sorted(reached)
                 print("   " , end = '')
@@ -159,12 +159,8 @@ class Graph:
     def takeEdgeUpOrDown(self, sourceName,  destName, statusToUpdate):
         edges = self.vertexMap[sourceName].adj
         for edge in edges:
-            if edge.destination == destName:
+            if edge.destination == destName and edge.isUp != statusToUpdate:
                 edge.isUp =  statusToUpdate
-                if statusToUpdate:
-                    print(f'Link from {sourceName} to {destName} is up...')
-                else:
-                    print(f'Link from {sourceName} to {destName} is down...')
 
     """Updates up/down status of a router
     
@@ -177,11 +173,8 @@ class Graph:
     """
     def takeVertexUpOrDown(self, verName, statusToUpdate):
         vertex = self.vertexMap[verName]
-        vertex.isUp = statusToUpdate
-        if statusToUpdate:
-            print(f'{verName} router is up')
-        else:
-            print(f'{verName} router is down')
+        if vertex.isUp != statusToUpdate:
+            vertex.isUp = statusToUpdate
 
     """Removes a link between two routers
     
@@ -197,7 +190,6 @@ class Graph:
         for edge in edges:
             if edge.destination == destName:
                 self.vertexMap[sourceName].adj.remove(edge)
-                print(f'Link from {sourceName} to {destName} is removed...')
 
     """ If router is not present, add it to network router map.
     In either case, return the router.

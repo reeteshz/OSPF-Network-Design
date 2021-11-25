@@ -134,13 +134,13 @@ class Graph:
     """
     def addEdge(self, sourceName,  destName, cost):
         alreadyExists = False
+        v = self.getVertex(sourceName)
         for edge in self.vertexMap[sourceName].adj:
             if edge.destination == destName:
                 edge.cost = float(cost)
                 alreadyExists = True
                 break
         if not alreadyExists:
-            v = self.getVertex(sourceName)
             w = self.getVertex(destName)
             edge = Edge(sourceName, destName, cost)
             v.adj.append(edge)

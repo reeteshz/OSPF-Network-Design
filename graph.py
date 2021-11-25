@@ -7,7 +7,7 @@ graph.py
 ________
     - It contains a class used to represent network graph.
     - Creates network graph as per the input file
-    - Performs netork operations such as Add Edge, Delete Edge, Edge Down, Edge Up, Vertex Down, Vertex Up
+    - Performs network operations such as Add Edge, Delete Edge, Edge Down, Edge Up, Vertex Down, Vertex Up
     - Computes shortest paths by OSPF protocol routes packets using Dijkstra's shortest path algorithm
     - Printing all routers and their adjacent routers
     - Printing all other reachable routers from the routers in the network
@@ -92,7 +92,7 @@ class Graph:
     Parameters
     ----------
     v : list
-        A list contains directed link pairs and trasmission cost as read from file input
+        A list contains directed link pairs and transmission cost as read from file input
     """
     def createGraph(self, edges):
         for edge in edges:
@@ -171,7 +171,7 @@ class Graph:
     verName : string
         A string indicates name of the router
     statusToUpdate : boolean
-        A boolean value indicates router status (Up/Down) to be upadted
+        A boolean value indicates router status (Up/Down) to be updated
     """
     def takeVertexUpOrDown(self, verName, statusToUpdate):
         vertex = self.vertexMap[verName]

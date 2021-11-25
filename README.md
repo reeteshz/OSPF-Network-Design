@@ -41,7 +41,7 @@ OSPF-Network-Design
   - It contains a class to represent the link between two routers in the network.
 
  `network.txt`
-  - It contains pairs of router which indicate linkage between them followed the time of data transmission between them
+  - It contains pairs of routers which indicate linkage between them followed the time of data transmission between them
   
     ````
     <source> <destination> <transmission time>
@@ -73,7 +73,7 @@ down situations.
 over that link
   - Add Link Query : `addedge <source-name> <destination-name> <trasmission-time>`
 - ***deleteEdge***  - It removes link between two routers in our data communication network
-  - Delete Link Query : `deletedge <source-name> <destination-name> <trasmission-time>`
+  - Delete Link Query : `deletedge <source-name> <destination-name>
 
 To get overview of our network communication, there are two useful methods:
 - ***printGraph*** - It prints each router (vertex) in the network and its adjacent routers. It is performed iterating

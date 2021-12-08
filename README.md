@@ -2,7 +2,6 @@
 
 ````
 Name: Reetesh Gopal Zope
-Student ID: 801138124
 ````
 
 ### How to run
